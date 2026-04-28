@@ -4,60 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+    </style>
 </head>
 <body>
     <h1>Task Tracker</h1>
-    <table>
-        <tr>
-            <th>House</th>
-            <th>Shift</th>
-            <th>Completion Rate</th>
-        </tr>
-        <tr>
-            <td>McKinley</td>
-            <td>Day</td>
-            <td>85%</td>
-        </tr>
-        <tr>
-            <td>McKinley</td>
-            <td>Evening</td>
-            <td>78%</td>
-        </tr>
-        <tr>
-            <td>McKinley</td>
-            <td>Overnight</td>
-            <td>90%</td>
-        </tr>
-        <tr>
-            <td>Oakland</td>
-            <td>Day</td>
-            <td>80%</td>
-        </tr>
-        <tr>
-            <td>Oakland</td>
-            <td>Evening</td>
-            <td>75%</td>
-        </tr>
-        <tr>
-            <td>Oakland</td>
-            <td>Overnight</td>
-            <td>88%</td>
-        </tr>
-        <tr>
-            <td>Arlington</td>
-            <td>Day</td>
-            <td>82%</td>
-        </tr>
-        <tr>
-            <td>Arlington</td>
-            <td>Evening</td>
-            <td>77%</td>
-        </tr>
-        <tr>
-            <td>Arlington</td>
-            <td>Overnight</td>
-            <td>85%</td>
-        </tr>
+    <h2>Houses</h2>
+    <div>
+        <button onclick="filterByHouse('McKinley')">McKinley</button>
+        <button onclick="filterByHouse('Oakland')">Oakland</button>
+        <button onclick="filterByHouse('Arlington')">Arlington</button>
+        <button onclick="filterByHouse('')">Show All</button>
+    </div>
+    <table id="task-table">
+        <thead>
+            <tr>
+                <th>Shift</th>
+                <th>Task</th>
+                <th>Frequency</th>
+                <th>House</th>
+                <th>Completion Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-house="McKinley" data-shift="Day">
+                <td>Day</td>
+                <td>Clean Floors</td>
+                <td>Daily</td>
+                <td>McKinley</td>
+                <td>80%</td>
+            </tr>
+            <tr data-house="McKinley" data-shift="Evening">
+                <td>Evening</td>
+                <td>Check Inventory</td>
+                <td>Weekly</td>
+                <td>McKinley</td>
+                <td>65%</td>
+            </tr>
+            <tr data-house="McKinley" data-shift="Overnight">
+                <td>Overnight</td>
+                <td>Inspect Security</td>
+                <td>Nightly</td>
+                <td>McKinley</td>
+                <td>90%</td>
+            </tr>
+            <tr data-house="Oakland" data-shift="Day">
+                <td>Day</td>
+                <td>Change Linens</td>
+                <td>Daily</td>
+                <td>Oakland</td>
+                <td>75%</td>
+            </tr>
+            <tr data-house="Oakland" data-shift="Evening">
+                <td>Evening</td>
+                <td>Prepare Meals</td>
+                <td>Weekly</td>
+                <td>Oakland</td>
+                <td>70%</td>
+            </tr>
+            <tr data-house="Oakland" data-shift="Overnight">
+                <td>Overnight</td>
+                <td>Monitor Cameras</td>
+                <td>Nightly</td>
+                <td>Oakland</td>
+                <td>85%</td>
+            </tr>
+            <tr data-house="Arlington" data-shift="Day">
+                <td>Day</td>
+                <td>Organize Supplies</td>
+                <td>Monthly</td>
+                <td>Arlington</td>
+                <td>60%</td>
+            </tr>
+            <tr data-house="Arlington" data-shift="Evening">
+                <td>Evening</td>
+                <td>Staff Meeting</td>
+                <td>As Needed</td>
+                <td>Arlington</td>
+                <td>50%</td>
+            </tr>
+            <tr data-house="Arlington" data-shift="Overnight">
+                <td>Overnight</td>
+                <td>Nightly Review</td>
+                <td>Nightly</td>
+                <td>Arlington</td>
+                <td>70%</td>
+            </tr>
+        </tbody>
     </table>
+    <script>
+        function filterByHouse(house) {
+            const rows = document.querySelectorAll('#task-table tbody tr');
+            rows.forEach(row => {
+                if (house && row.getAttribute('data-house') !== house) {
+                    row.style.display = 'none';
+                } else {
+                    row.style.display = '';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
